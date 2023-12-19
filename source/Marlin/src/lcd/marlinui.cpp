@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -49,7 +49,7 @@ MarlinUI ui;
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
  bool MarlinUI::preheating_start;
  bool MarlinUI::preheating_stop;
- bool MarlinUI::is_leveing;
+ bool MarlinUI::is_leveling;
 #endif		
 #include "menu.h"
 #if HAS_DISPLAY
@@ -2082,7 +2082,7 @@ extern  uint8_t SOS_flag;
         #elif PIN_EXISTS(SD_DETECT)
           LCD_MESSAGEPGM(MSG_MEDIA_REMOVED);
           #if HAS_LCD_MENU
-		  	if(ui.is_leveing) return;
+		  	if(ui.is_leveling) return;
             if (!defer_return_to_status) return_to_status();
           #endif
         #endif

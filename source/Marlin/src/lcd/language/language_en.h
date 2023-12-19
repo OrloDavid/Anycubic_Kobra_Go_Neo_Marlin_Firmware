@@ -46,8 +46,8 @@
 namespace Language_en {
   constexpr uint8_t CHARSIZE              = 2;
   
-  LSTR MSG_LEVEING_HOME             	  = _UxGT("Home");
-  LSTR MSG_WAIT_LEVELING_HEAT             = _UxGT("Wait Leveing heat");
+  LSTR MSG_LEVELING_HOME             	  = _UxGT("Homing Axis");
+  LSTR MSG_WAIT_LEVELING_HEAT             = _UxGT("Wait For Temps");
   LSTR MSG_ABOUT                         = _UxGT("About");
  LSTR LANGUAGE                           = _UxGT("English");
   LSTR LANGUAGE_2                         = _UxGT("English");

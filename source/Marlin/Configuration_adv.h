@@ -1012,13 +1012,14 @@
  * below 1kHz (for AVR) or 10kHz (for ARM), where aliasing between axes in multi-axis moves causes audible
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
- */
+ */ 
+
 //#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
  * Override as-needed for your setup. Up to 3 MS pins are supported.
- */
+ */ 
 //#define MICROSTEP1 LOW,LOW,LOW
 //#define MICROSTEP2 HIGH,LOW,LOW
 //#define MICROSTEP4 LOW,HIGH,LOW
@@ -1027,7 +1028,8 @@
 //#define MICROSTEP32 HIGH,LOW,HIGH
 
 // Microstep settings (Requires a board with pins named X_MS1, X_MS2, etc.)
-#define MICROSTEP_MODES { 16, 16, 16, 16, 16, 16 } // [1,2,4,8,16]
+
+#define MICROSTEP_MODES { 32, 32, 32, 32, 32, 32 } // [1,2,4,8,16,32]
 
 /**
  *  @section  stepper motor current
@@ -1048,7 +1050,8 @@
  *    M907 - applies to all.
  *    M908 - BQ_ZUM_MEGA_3D, RAMBO, PRINTRBOARD_REVF, RIGIDBOARD_V2 & SCOOVO_X9H
  *    M909, M910 & LCD - only PRINTRBOARD_REVF & RIGIDBOARD_V2
- */
+ */ 
+
 //#define PWM_MOTOR_CURRENT { 1300, 1300, 1250 }          // Values in milliamps
 //#define DIGIPOT_MOTOR_CURRENT { 135,135,135,135,135 }   // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
 //#define DAC_MOTOR_CURRENT_DEFAULT { 70, 80, 90, 80 }    // Default drive percent - X, Y, Z, E axis
@@ -1073,10 +1076,12 @@
    *                        A   (A shifted)   B   (B shifted)  IC
    * Smoothie              0x2C (0x58)       0x2D (0x5A)       MCP4451
    * AZTEEG_X3_PRO         0x2C (0x58)       0x2E (0x5C)       MCP4451
-   * AZTEEG_X5_MINI        0x2C (0x58)       0x2E (0x5C)       MCP4451
+   * 
+AZTEEG_X5_MINI        0x2C (0x58)       0x2E (0x5C)       MCP4451
    * AZTEEG_X5_MINI_WIFI         0x58              0x5C        MCP4451
    * MIGHTYBOARD_REVE      0x2F (0x5E)                         MCP4018
-   */
+   */ 
+
   //#define DIGIPOT_I2C_ADDRESS_A 0x2C  // Unshifted slave address for first DIGIPOT
   //#define DIGIPOT_I2C_ADDRESS_B 0x2D  // Unshifted slave address for second DIGIPOT
 #endif
@@ -1523,7 +1528,7 @@
   //#define STATUS_ALT_FAN_BITMAP     // Use the alternative fan bitmap
   //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
   #define STATUS_HEAT_PERCENT       // Show heating in a progress bar
-  //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~â€?260 (or ~940) bytes of PROGMEM.
+  //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~ï¿½?260 (or ~940) bytes of PROGMEM.
 
   // Frivolous Game Options
   //#define MARLIN_BRICKOUT
@@ -2166,13 +2171,14 @@
  *
  * The TMC26XStepper library is required for this stepper driver.
  * https://github.com/trinamic/TMC26XStepper
- */
+ */ 
+
 #if HAS_DRIVER(TMC26X)
 
   #if AXIS_DRIVER_TYPE_X(TMC26X)
    #define X_MAX_CURRENT     1000  // (mA)
-    #define X_SENSE_RESISTOR    91  // (mOhms)
-    #define X_MICROSTEPS        16  // Number of microsteps
+   #define X_SENSE_RESISTOR    91  // (mOhms)
+   #define X_MICROSTEPS        32  // Number of microsteps
   #endif
 
   #if AXIS_DRIVER_TYPE_X2(TMC26X)
@@ -2184,7 +2190,7 @@
   #if AXIS_DRIVER_TYPE_Y(TMC26X)
     #define Y_MAX_CURRENT      1000
     #define Y_SENSE_RESISTOR    91
-    #define Y_MICROSTEPS        16
+    #define Y_MICROSTEPS        32
   #endif
 
   #if AXIS_DRIVER_TYPE_Y2(TMC26X)
@@ -2196,7 +2202,7 @@
   #if AXIS_DRIVER_TYPE_Z(TMC26X)
    #define Z_MAX_CURRENT      1000
   #define Z_SENSE_RESISTOR    91
-   #define Z_MICROSTEPS        16
+   #define Z_MICROSTEPS        32
   #endif
 
   #if AXIS_DRIVER_TYPE_Z2(TMC26X)
@@ -2220,7 +2226,7 @@
   #if AXIS_DRIVER_TYPE_E0(TMC26X)
    #define E0_MAX_CURRENT     1000
     #define E0_SENSE_RESISTOR   91
-    #define E0_MICROSTEPS       16
+    #define E0_MICROSTEPS       32
   #endif
 
   #if AXIS_DRIVER_TYPE_E1(TMC26X)
@@ -2298,7 +2304,7 @@
   #if AXIS_IS_TMC(X)
    #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
-    #define X_MICROSTEPS     16        // 0..256
+    #define X_MICROSTEPS     32        // 0..256
     #define X_RSENSE          0.11
    #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
   //#define X_INTERPOLATE  true      // Enable to override 'INTERPOLATE' for the X axis
@@ -2316,7 +2322,7 @@
   #if AXIS_IS_TMC(Y)
  #define Y_CURRENT       800
 #define Y_CURRENT_HOME  Y_CURRENT
- #define Y_MICROSTEPS     16
+ #define Y_MICROSTEPS     32
  #define Y_RSENSE          0.11
  #define Y_CHAIN_POS      -1
 //#define Y_INTERPOLATE  true
@@ -2334,7 +2340,7 @@
   #if AXIS_IS_TMC(Z)
    #define Z_CURRENT       800
   #define Z_CURRENT_HOME  Z_CURRENT
-  #define Z_MICROSTEPS     16
+  #define Z_MICROSTEPS     32
   #define Z_RSENSE          0.11
   #define Z_CHAIN_POS      -1
  //#define Z_INTERPOLATE  true
@@ -2369,7 +2375,7 @@
 
   #if AXIS_IS_TMC(E0)
   #define E0_CURRENT      600
- #define E0_MICROSTEPS    16
+ #define E0_MICROSTEPS    32
   #define E0_RSENSE         0.11
   #define E0_CHAIN_POS     -1
   //#define E0_INTERPOLATE true
@@ -2551,7 +2557,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-//  #define MONITOR_DRIVER_STATUS
+#define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
    #define CURRENT_STEP_DOWN     50  // [mA]
@@ -2572,11 +2578,11 @@
 // #define X2_HYBRID_THRESHOLD    100
   #define Y_HYBRID_THRESHOLD     100
  // #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD       3
+  #define Z_HYBRID_THRESHOLD       10
  // #define Z2_HYBRID_THRESHOLD      3
 //  #define Z3_HYBRID_THRESHOLD      3
  // #define Z4_HYBRID_THRESHOLD      3
- #define E0_HYBRID_THRESHOLD     30
+ #define E0_HYBRID_THRESHOLD     50
  // #define E1_HYBRID_THRESHOLD     30
  // #define E2_HYBRID_THRESHOLD     30
  // #define E3_HYBRID_THRESHOLD     30

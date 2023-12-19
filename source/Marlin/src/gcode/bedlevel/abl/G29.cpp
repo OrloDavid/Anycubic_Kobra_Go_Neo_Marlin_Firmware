@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -913,7 +913,7 @@ G29_TYPE GcodeSuite::G29() {
 #if HAS_LCD_MENU
   	LCD_ALERTMESSAGEPGM(MSG_LEVEL_FINSH);
 	ui.preheating_start = ui.preheating_stop = false;
-	ui.is_leveing = false;
+	ui.is_leveling = false;
 #endif	
 	
   } else {
@@ -931,7 +931,7 @@ G29_TYPE GcodeSuite::G29() {
 	process_subcommands_now_P("G29 J");
 	LCD_ALERTMESSAGEPGM(MSG_LEVEL_FAILD);
 	ui.preheating_start = ui.preheating_stop = false;
-	ui.is_leveing = false;
+	ui.is_leveling = false;
 #endif	
   }
   

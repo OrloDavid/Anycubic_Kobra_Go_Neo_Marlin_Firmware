@@ -25,6 +25,7 @@
 #pragma once
 
 #include "../../../inc/MarlinConfig.h"
+#include "Configuration.h"
 
 enum MeshLevelingState : char {
   MeshReport,     // G29 S0

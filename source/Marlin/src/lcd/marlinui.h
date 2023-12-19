@@ -523,7 +523,7 @@ public:
   	#if ENABLED(PREHEAT_BEFORE_LEVELING)
 		static bool preheating_start;
 		static bool preheating_stop;
-		static bool is_leveing;
+		static bool is_leveling;
 	#endif
     #if HAS_TOUCH_BUTTONS
       static uint8_t touch_buttons;

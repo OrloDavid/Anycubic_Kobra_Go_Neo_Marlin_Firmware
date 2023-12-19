@@ -1,3 +1,4 @@
 {
     "C_Cpp.default.compileCommands": "",
+    "C_Cpp.dimInactiveRegions": false,
 }

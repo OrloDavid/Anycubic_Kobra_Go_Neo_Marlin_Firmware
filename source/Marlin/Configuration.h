@@ -736,9 +736,9 @@
  * - To fix noise install a 100nF ceramic capacitor in parallel with the switch.
  * - This feature is not required for common micro-switches mounted on PCBs
  *   based on the Makerbot design, which already have the 100nF capacitor.
- *
  * :[2,3,4,5,6,7]
- */
+*/
+
 //#define ENDSTOP_NOISE_THRESHOLD 2
 
 // Check for stuck or disconnected endstops during homing moves.
@@ -755,45 +755,55 @@
  * These settings can be reset by M502
  *
  * Note that if EEPROM is enabled, saved values will override these.
- */
+ */ 
 
 /**
  * With this option each E stepper can have its own factors for the
  * following movement settings. If fewr factors are given than the
  * total number of extruders, the last value applies to the rest.
  */
+
 //#define DISTINCT_E_FACTORS
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
- */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 426.32 }    // Def. { 80, 80, 400, 103 }
+ */ 
 
-/**
- * Default Max Feed Rate (mm/s)
- * Override with M203
- *                                      X, Y, Z, E0 [, E1[, E2...]]
- */
-#define DEFAULT_MAX_FEEDRATE   { 300, 300, 30, 32 }    // Def.  { 300, 300, 4, 25 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 103 }    // Def. { 80, 80, 200, 103 }  
+// Def. Z Lead is [T8 8mm-Lead 4-Start 2mm-Pitch] | XSymmetry is [T8 4mm-Lead 2-Start 2mm-Pitch]
+// Def. Extruder entry 
+//(diameter of gear) 9.82 * 3.14 (pi) = 30.84 Extrude Gear Circumferance
+//Stepper Steps (circle in degrees) 360 / 1.8 (stepper degree  1.8 or .9) = 200 Steps per revolution
+//Total Steps per Revolution (Steps per revolution) 200 * 16 (microsteps) = 3200 Microsteps per revolution
+//(Extrude gear circumference) 30.84 / 3200 (Microsteps per revolution) = 103.76 Axis Steps Per Unit
+// Bondtech starting point is 50/17 (teeth on gears divided) = 2.94 * 103 (Axis Steps Per Unit) = 305 
+
+
+// Default Max Feed Rate (mm/s) 
+// Override with M203  
+//                                      X, Y, Z, E0 [, E1[, E2...]]  
+
+#define DEFAULT_MAX_FEEDRATE   { 300, 300, 10, 55 }    // Def.  { 300, 300, 4, 25 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
+
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 350, 350, 45, 85 }    //Def. { 600, 600, 10, 50 } 
+  #define MAX_FEEDRATE_EDIT_VALUES    { 350, 350, 15, 85 }    //Def. { 600, 600, 10, 50 } 
 #endif
 
 /**
- * Default Max Acceleration (change/s) change = mm/s
+ * Default Max Acceleration (change/s) change = mm/s  
  * (Maximum start speed for accelerated moves)
  * Override with M201
- *                                      X, Y, Z, E0 [, E1[, E2...]]
- */
+ *                                      X, Y, Z, E0 [, E1[, E2...]]  
+ */  
 #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 30, 1000 }   //Def.  { 500, 500, 100, 1000 }
 
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 1800, 1800, 45, 1500 }  // Def.  { 6000, 6000, 200, 10000 }
+  #define MAX_ACCEL_EDIT_VALUES       { 3000, 3000, 120, 3000 }  // Def.  { 6000, 6000, 200, 10000 }
 #endif
 
 /**
@@ -804,7 +814,7 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          750     // X, Y, Z and E acceleration for printing moves    Def. 500
+#define DEFAULT_ACCELERATION          1000     // X, Y, Z and E acceleration for printing moves    Def. 500
 #define DEFAULT_RETRACT_ACCELERATION  1000   // E acceleration for retracts  Def. 500
 #define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves   Def. 1000
 
@@ -818,19 +828,19 @@
  */
 #define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK  7.5    //    Def. 5
-  #define DEFAULT_YJERK  7.5    //   Def. 5
-  #define DEFAULT_ZJERK  0.3    //   Def. 5
+  #define DEFAULT_XJERK  7.0    //    Def. 5.0
+  #define DEFAULT_YJERK  7.0   //   Def. 5.0
+  #define DEFAULT_ZJERK  0.5    //   Def. 0.5
 
-    #define TRAVEL_EXTRA_XYJERK 0.0     // Additional jerk allowance for all travel moves
+    #define TRAVEL_EXTRA_XYJERK 1.0    // Additional jerk allowance for all travel moves
 
     #define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
   #if ENABLED(LIMITED_JERK_EDITING)
-    #define MAX_JERK_EDIT_VALUES { 11, 11, 1, 10 }  // Def. { 20, 20, 0.6, 10 } 
+    #define MAX_JERK_EDIT_VALUES { 20 , 20, 5, 20 }  // Def. { 20, 20, 0.6, 10 } 
   #endif
 #endif
 
-#define DEFAULT_EJERK    6.0  // May be used by Linear Advance   Def. 5
+#define DEFAULT_EJERK    5.0  // May be used by Linear Advance   Def. 5
 
 /**
  * Junction Deviation Factor
@@ -1036,11 +1046,11 @@
 //Def. 200x60   =     12,000 mm/min (Not a real figure, limited by other means)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST (35*60)   
+#define Z_PROBE_SPEED_FAST (15*60)   
 //Def.   4x60   =      240   mm/min
 
-// Feedrate (mm/min) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 10)     
+// Feedrate (mm/min) for the "accurate" probe of each point 
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 4)     
 //Def.  /2   =     120 mm/min
 
 /**
@@ -1078,9 +1088,10 @@
  *
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
- */
+ */ 
+
 #define MULTIPLE_PROBING 3
-#define EXTRA_PROBING    1       //Enabled because we hit it hard n fast on the first probe, might not be reliable
+#define EXTRA_PROBING    0       //Enabled because we hit it hard n fast on the first probe, might not be reliable
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1095,9 +1106,10 @@
  *
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
- */
+ */ 
+
 #define Z_CLEARANCE_DEPLOY_PROBE   5 // Z Clearance for Deploy/Stow Def. 10
-#define Z_CLEARANCE_BETWEEN_PROBES  3 // Z Clearance between probe points  Def. 5
+#define Z_CLEARANCE_BETWEEN_PROBES  3  // Z Clearance between probe points  Def. 5
 #define Z_CLEARANCE_MULTI_PROBE     2.5 // Z Clearance between multiple probes Def. 5
 //#define Z_AFTER_PROBING           0  // Z position after probing is done          TODO why did I have this at 10 and enabled?
 
@@ -1110,7 +1122,7 @@
 // Enable the M48 repeatability test to test probe accuracy
 #define Z_MIN_PROBE_REPEATABILITY_TEST
 
-// Before deploy/stow pause for user confirmation
+// Before deploy/stow pause for user confirmation 
 //#define PAUSE_BEFORE_DEPLOY_STOW
 #if ENABLED(PAUSE_BEFORE_DEPLOY_STOW)
   //#define PAUSE_PROBE_DEPLOY_WHEN_TRIGGERED // For Manual Deploy Allenkey Probe
@@ -1134,7 +1146,7 @@
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
 #if ENABLED(PREHEAT_BEFORE_PROBING)
-  #define PROBING_NOZZLE_TEMP 130   // (°C) Only applies to E0 at this time
+  #define PROBING_NOZZLE_TEMP  80  // (°C) Only applies to E0 at this time
   #define PROBING_BED_TEMP     55
 #endif
 
@@ -1164,7 +1176,7 @@
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
 #define INVERT_Y_DIR false
-#define INVERT_Z_DIR false //Xsymmetry Mod
+#define INVERT_Z_DIR false //Def. true / Xsymmetry Mod false
 
 // @section extruder
 
@@ -1187,7 +1199,7 @@
 #define Z_HOMING_HEIGHT  15      // (mm) Minimal Z height before homing (G28)  Increased To support XSymmetry UnderSlung    /See Orlo Github
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-#define Z_AFTER_HOMING  50      // (mm) Height to move to after homing Z        Increased To support XSymmetry UnderSlung   /See Orlo Github
+#define Z_AFTER_HOMING  20      // (mm) Height to move to after homing Z        Increased To support XSymmetry UnderSlung   /See Orlo Github
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]

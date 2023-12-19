@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -194,7 +194,7 @@
   //
   // Step 2: Continue Bed Leveling...
   //
-  void _lcd_level_bed_continue() {
+ void _lcd_level_bed_continue() {
     ui.defer_status_screen();
     set_all_unhomed();
     ui.goto_screen(_lcd_level_bed_homing);
@@ -222,98 +222,7 @@
 
 #endif // MESH_EDIT_MENU
 
-void report_leveing_status(int8_t        state)
-{
-		ui.return_to_status();
-		if(state != -1) {
 
-		}
-		else
-		{
-		
-		}
-}
-
-void leveing_probeing()
-{
-   int16_t hotend_currentTemperature =  thermalManager.temp_hotend[0].celsius;
-   int16_t hotend_targetTemperature =   thermalManager.temp_hotend[0].target;
-   int16_t bed_currenttTemperature =   thermalManager.temp_bed.celsius;
-   int16_t bed_targetTemperature =   thermalManager.temp_bed.target;
-	 
-	 ui.defer_status_screen();
-	 
-	if(ui.should_draw())
-	{
-		if(ui.preheating_start == false && ui.preheating_stop == false)
-		{
-			tft.canvas(0, 100, TFT_WIDTH, 30);
-			tft.set_background(COLOR_BACKGROUND);
-			tft_string.set(GET_TEXT(MSG_LEVEING_HOME));
-			tft_string.trim();
-			tft.add_text(tft_string.center(TFT_WIDTH),5,COLOR_FOREGROUND,tft_string);
-		}
-		else if(ui.preheating_start == true && ui.preheating_stop == false)
-		{
-			tft.canvas(0, 60, TFT_WIDTH, 30);
-			tft.set_background(COLOR_BACKGROUND);
-			tft_string.set(GET_TEXT(MSG_WAIT_LEVELING_HEAT));
-			tft_string.trim();
-			tft.add_text(tft_string.center(TFT_WIDTH),5,COLOR_FOREGROUND,tft_string);
-		
-			tft.canvas(110, 100, 160, 30);
-			tft.set_background(COLOR_BACKGROUND); 
-			tft.add_text(0,0,COLOR_FOREGROUND, "E :");
-			tft.add_text(30,0,COLOR_FOREGROUND, i16tostr3rj(hotend_currentTemperature));
-			tft.add_text(70,0,COLOR_FOREGROUND, "/"); 
-			tft.add_text(80,0,COLOR_FOREGROUND, i16tostr3rj(LEVELING_NOZZLE_TEMP));
-
-			tft.canvas(110, 140, 160, 30);
-			tft.set_background(COLOR_BACKGROUND); 
-			tft.add_text(0,0,COLOR_FOREGROUND, "B :");				
-			tft.add_text(30,0,COLOR_FOREGROUND, i16tostr3rj(bed_currenttTemperature));
-			tft.add_text(70,0,COLOR_FOREGROUND, "/"); 
-			tft.add_text(80,0,COLOR_FOREGROUND, i16tostr3rj(LEVELING_BED_TEMP));
-			
-		}
-		else if(ui.preheating_start == false && ui.preheating_stop == true)
-		{
-
-			//tft.canvas(0, 0, TFT_WIDTH, TFT_HEIGHT);
-			tft.canvas(0, 55, TFT_WIDTH, 110);
- 			tft.set_background(COLOR_BACKGROUND);
- 			tft_string.set(GET_TEXT(MSG_LEVEL_POP_UP));
- 			tft_string.trim();
-			//tft.add_text(tft_string.center(TFT_WIDTH),110,COLOR_FOREGROUND,tft_string);
-			tft.add_text(tft_string.center(TFT_WIDTH),55,COLOR_FOREGROUND,tft_string);
-			
-		}
-
-
-	}
-	ui.refresh(LCDVIEW_CALL_REDRAW_NEXT);
-
-}
-
-void begin_bed_lever()
-{
-	ui.is_leveing = true; // The status page is not returned when remove sd card
-    queue.inject_P(PSTR("M851 Z0\nG28\nG29"));
-   	//ui.return_to_status();
-   	ui.goto_screen(leveing_probeing);
-	
-   	
-}
-
-void cancel_leveing() {
-	set_all_homed();
-	queue.inject_P(PSTR("G29 J"));
-	planner.synchronize();
-	set_all_unhomed();
-	queue.inject_P(PSTR("M500"));
-//	LCD_MESSAGEPGM(MSG_CANCEL_LEVEING);
-	ui.return_to_status();
-}
 /**
  * Step 1: Bed Level entry-point
  *
@@ -333,27 +242,23 @@ void menu_bed_leveling() {
              is_valid = leveling_is_valid();
 
   START_MENU();
-  BACK_ITEM(MSG_BACK);
+  BACK_ITEM(MSG_MOTION);
 
   // Auto Home if not using manual probing
 #if NONE(PROBE_MANUALLY, MESH_BED_LEVELING)
     if (!is_homed) GCODES_ITEM(MSG_AUTO_HOME, G28_STR);
   #endif
 
- 
+
   // Level Bed
   #if EITHER(PROBE_MANUALLY, MESH_BED_LEVELING)
     // Manual leveling uses a guided procedure
     SUBMENU(MSG_LEVEL_BED, _lcd_level_bed_continue);
   #else
-    // Automatic leveling can just run the G-code    
+    // Automatic leveling can just run the G-code
     GCODES_ITEM(MSG_LEVEL_BED, is_homed ? PSTR("G29") : PSTR("G29N"));
   #endif
 
-//  #endif
-//  GCODES_ITEM(MSG_LEVEL_BED, is_homed ? PSTR("M851 Z0\nG29") : PSTR("M851 Z0\nG29N"));
-    // SUBMENU(MSG_LEVEL_BED, begin_bed_lever);
-     //GCODES_ITEM(MSG_LEVEL_BED, PSTR("M851 Z0\nG28\nG29\n M500"));
 
   #if ENABLED(MESH_EDIT_MENU)
     if (is_valid) SUBMENU(MSG_EDIT_MESH, menu_edit_mesh);
@@ -377,8 +282,7 @@ void menu_bed_leveling() {
   // Mesh Bed Leveling Z-Offset
   //
   #if ENABLED(MESH_BED_LEVELING)
-      #define LCD_Z_OFFSET_TYPE float43
-    EDIT_ITEM(LCD_Z_OFFSET_TYPE, MSG_BED_Z, &mbl.z_offset, Z_PROBE_OFFSET_RANGE_MIN, Z_PROBE_OFFSET_RANGE_MAX);
+    EDIT_ITEM(float43, MSG_BED_Z, &mbl.z_offset, -1, 1);
   #endif
 
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
@@ -390,18 +294,89 @@ void menu_bed_leveling() {
   #if ENABLED(LEVEL_BED_CORNERS)
     SUBMENU(MSG_LEVEL_CORNERS, _lcd_level_bed_corners);
   #endif
-  
-  //SUBMENU(MSG_CANCEL_LEVEING, cancel_leveing);
 
   #if ENABLED(EEPROM_SETTINGS)
-	  const bool busy = printingIsActive();
+    ACTION_ITEM(MSG_LOAD_EEPROM, ui.load_settings);
     ACTION_ITEM(MSG_STORE_EEPROM, ui.store_settings);
-    if (!busy) ACTION_ITEM(MSG_LOAD_EEPROM, ui.load_settings);
   #endif
   END_MENU();
 }
 
 #endif // LCD_BED_LEVELING
 
+// None of this code seems to work or do much once other functions are fixed. Makes more sense to try to fix the official code over this non-sense/garbage
+// David Orlo 12/18/23
+/**
+ void report_leveling_status(int8_t        state)
+{
+        ui.return_to_status();
+        }
 
+void AC_leveling_probing()
+{
+   int16_t hotend_currentTemperature =  thermalManager.temp_hotend[0].celsius;
+   int16_t hotend_targetTemperature =   thermalManager.temp_hotend[0].target;
+   int16_t bed_currenttTemperature =   thermalManager.temp_bed.celsius;
+   int16_t bed_targetTemperature =   thermalManager.temp_bed.target;
+     ui.defer_status_screen();
+    if(ui.should_draw())
+    {
+        if(ui.preheating_start == false && ui.preheating_stop == false)
+        {
+            tft.canvas(0, 100, TFT_WIDTH, 30);
+            tft.set_background(COLOR_BACKGROUND);
+            tft_string.set(GET_TEXT(MSG_LEVELING_HOME));
+            tft_string.trim();
+            tft.add_text(tft_string.center(TFT_WIDTH),5,COLOR_FOREGROUND,tft_string);
+        }
+        else if(ui.preheating_start == true && ui.preheating_stop == false)
+        {
+            tft.canvas(0, 60, TFT_WIDTH, 30);
+            tft.set_background(COLOR_BACKGROUND);
+            tft_string.set(GET_TEXT(MSG_WAIT_LEVELING_HEAT));
+            tft_string.trim();
+            tft.add_text(tft_string.center(TFT_WIDTH),5,COLOR_FOREGROUND,tft_string);
+            tft.canvas(110, 100, 160, 30);
+            tft.set_background(COLOR_BACKGROUND);
+            tft.add_text(0,0,COLOR_FOREGROUND, "E :");
+            tft.add_text(30,0,COLOR_FOREGROUND, i16tostr3rj(hotend_currentTemperature));
+            tft.add_text(70,0,COLOR_FOREGROUND, "/");
+            tft.add_text(80,0,COLOR_FOREGROUND, i16tostr3rj(LEVELING_NOZZLE_TEMP));
+            tft.canvas(110, 140, 160, 30);
+            tft.set_background(COLOR_BACKGROUND);
+            tft.add_text(0,0,COLOR_FOREGROUND, "B :");
+            tft.add_text(30,0,COLOR_FOREGROUND, i16tostr3rj(bed_currenttTemperature));
+            tft.add_text(70,0,COLOR_FOREGROUND, "/");
+            tft.add_text(80,0,COLOR_FOREGROUND, i16tostr3rj(LEVELING_BED_TEMP));
+        }
+        else if(ui.preheating_start == false && ui.preheating_stop == true)
+        {
+            //tft.canvas(0, 0, TFT_WIDTH, TFT_HEIGHT);
+            tft.canvas(0, 55, TFT_WIDTH, 110);
+            tft.set_background(COLOR_BACKGROUND);
+            tft_string.set(GET_TEXT(MSG_LEVEL_POP_UP));
+            tft_string.trim();
+            //tft.add_text(tft_string.center(TFT_WIDTH),110,COLOR_FOREGROUND,tft_string);
+            tft.add_text(tft_string.center(TFT_WIDTH),55,COLOR_FOREGROUND,tft_string);
+}
+    }
+    ui.refresh(LCDVIEW_CALL_REDRAW_NEXT);
+}
 
+void AC_begin_bed_level()
+{
+    ui.is_leveling = true; // The status page is not returned when remove sd card
+    queue.inject_P(PSTR("M851 Z0\nG28\nG29"));
+      menu_edit_mesh();
+}
+
+void AC_cancel_leveling() {
+    set_all_homed();
+    queue.inject_P(PSTR("G29 J"));
+    planner.synchronize();
+    set_all_unhomed();
+    queue.inject_P(PSTR("M500"));
+//  LCD_MESSAGEPGM(MSG_AC_cancel_leveling);
+    ui.return_to_status();
+}
+*/

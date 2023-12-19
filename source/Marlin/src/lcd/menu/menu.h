@@ -30,10 +30,10 @@
 
 
 
-#define DEVICE_NAME             "Kobra Go Modified"
-#define FIRMWARE_VER            "v1.3.4x"
-#define BUILD_VOLUME            "220*220*250 (mm)"
-#define TECH_SUPPORT            "https://github.com/OrloDavid"
+#define DEVICE_NAME             "Anycubic: Kobra Go"
+#define FIRMWARE_VER            "Marlin 2.0.6.2- 2.0.8.3 + Bugfix"
+#define BUILD_VOLUME            "King Kobra Firmware  v2"
+#define TECH_SUPPORT            "Github.com/OrloDavid"
 
 
 

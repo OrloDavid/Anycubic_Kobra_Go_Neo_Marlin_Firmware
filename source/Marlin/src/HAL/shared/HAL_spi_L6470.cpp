@@ -35,8 +35,12 @@
 #include "../../libs/L64XX/L64XX_Marlin.h"
 
 // Make sure GCC optimizes this file.
-// Note that this line triggers a bug in GCC which is fixed by casting.
-// See the note below.
+// Note that this line triggers a bug in GCC which is fixed by casting.  
+//DMO 12/18/23 
+// ....*I cast Holy 'Trigger Trap of Trinamic Tickles' *~.-_~@..~*_*-.~.
+// ... [ Code Mimic takes 0 points of damage ] /David Orlo has wasted magic 
+
+
 #pragma GCC optimize (3)
 
 // run at ~4Mhz
