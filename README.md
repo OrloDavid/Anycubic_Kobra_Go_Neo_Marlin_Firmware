@@ -36,12 +36,12 @@ During this endeavor, I developed custom scripts and created User Defined Langua
 
 Additionally, I have streamlined the codebase by removing irrelevant files and folders, simplifying troubleshooting and maintenance without compromising compatibility with the NEO model. This process included removing unnecessary components such as Delta, Lasers, Disco Balls, and 52" Plasma configurations.
 
-### X-Symmetry Project
+### Centered-Z Project
 
-The X-Symmetry folder and project will be updated soon. Having completed the Rev.1, and with parts for Rev.2 on their way, this modification is highly recommended for any cartesian style 3D printer, not just the Kobra Go. The potential impact of this modification on the cartesian printer landscape is significant.
+The Centered-Z folder and project will be updated soon. Having completed the Rev.1, and with parts for Rev.2 on their way, this modification is highly recommended for any cartesian style 3D printer, not just the Kobra Go. The potential impact of this modification on the cartesian printer landscape is significant.
 
 ### Transition to Klipper
 
-The next phase involves transitioning my printer to Klipper firmware. This move is planned after completing the current project and the X-Symmetry Rev.1 build. The goal is to create an easy path for others to transition to Klipper, potentially utilizing the factory LCD and exploring alternatives to Raspberry Pi for a similar cost.
+The next phase involves transitioning my printer to Klipper firmware. This move is planned after completing the current project and the Centered-Z Rev.1 build. The goal is to create an easy path for others to transition to Klipper, potentially utilizing the factory LCD and exploring alternatives to Raspberry Pi for a similar cost.
 
 Stay tuned for more updates and feel free to contribute or reach out with questions and suggestions.
