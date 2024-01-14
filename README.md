@@ -45,3 +45,25 @@ The Centered-Z folder and project will be updated soon. Having completed the Rev
 The next phase involves transitioning my printer to Klipper firmware. This move is planned after completing the current project and the Centered-Z Rev.1 build. The goal is to create an easy path for others to transition to Klipper, potentially utilizing the factory LCD and exploring alternatives to Raspberry Pi for a similar cost.
 
 Stay tuned for more updates and feel free to contribute or reach out with questions and suggestions.
+
+
+# **This repositiory was created to share my work on the Marlin firmware for the Anycubic Kobra Go / Neo 3D Printers**
+- Additional repositories, files, mods and piectures For the Go / Neo can be found at the following links
+
+- - **Firmware Repository for Kobra Go / Neo**
+  - [Kobra Go / Neo Marlin Firmware](https://github.com/OrloDavid/Kobra_Go_Neo_Marlin_Firmware)
+
+- **Everything Else 3D Printing Related by David Orlo**
+  - [Orlo 3D Printer Stuff on GitHub](https://github.com/OrloDavid/Orlo_3D_Printer_Stuff)
+
+- **David Orlo's Reddit Account (For Instructions/Guides)**
+  - [Azyn_One on Reddit](https://www.reddit.com/user/Azyn_One/submitted/)
+
+- **David Orlo's YouTube Channel**
+  - [David Orlo on YouTube](https://www.youtube.com/@DavidMiOo)
+
+- **David Orlo's 3D Files on Tinkercad, Thingiverse, and Printables**
+  - [Tinkercad (Login Required)](https://www.tinkercad.com/users/0RxhGZwzXXM-david-m-orlo)
+  - [Thingiverse Designs](https://www.thingiverse.com/a_makers_life/designs)
+  - [Printables Profile](https://www.printables.com/@DavidmOrlo_1689053)
+
