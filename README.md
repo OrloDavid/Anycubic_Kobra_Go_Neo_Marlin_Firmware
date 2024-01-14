@@ -1,5 +1,5 @@
 # AnyCubic Kobra Go / Neo TriGorilla Gen_V.3.0.7
-## David M. Orlo | 'King Kobra' Build
+## David M. Orlo | 'Kobra Go Neo Marlin' Build
 
 Welcome to the new beginning of the AnyCubic Kobra Go / Neo TriGorilla project. This repository marks a fresh start, deviating from the previous fork. After extensive work and consideration, it became evident that starting anew from scratch would be the most effective approach.
 
